@@ -1,0 +1,161 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Ticket Management System</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="apple-touch-icon" href="{% static 'img/apple-icon.png' %}">
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}">
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/templatemo.css' %}">
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+
+    <!-- Load fonts style after rendering the layout styles -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
+    <link rel="stylesheet" href="{% static 'css/fontawesome.min.css' %}">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+<!--
+    
+TemplateMo 559 Zay Shop
+
+https://templatemo.com/tm-559-zay-shop
+
+-->
+</head>
+
+<body>
+
+
+    <!-- Header -->
+    <nav class="navbar navbar-expand-lg navbar-light shadow">
+        <div class="container d-flex justify-content-between align-items-center">
+
+            <a class="navbar-brand text-success logo h2 align-self-center" href="{% url 'user_home' %}">
+                Ticket Management System
+            </a>
+
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#templatemo_main_nav" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="align-self-center collapse navbar-collapse flex-fill  d-lg-flex justify-content-lg-between" id="templatemo_main_nav">
+                <div class="flex-fill">
+                    <ul class="nav navbar-nav d-flex justify-content-end mx-lg-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'user_home' %}">Raise A Ticket</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'user_view' %}">View Tickets</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'user_status' %}">Status</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'main_home' %}">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+                
+            </div>
+
+        </div>
+    </nav>
+    <!-- Close Header -->
+
+    <!-- Modal -->
+    <div class="modal fade bg-white" id="templatemo_search" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="w-100 pt-1 mb-5 text-right">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="" method="get" class="modal-content modal-body border-0 p-0">
+                <div class="input-group mb-2">
+                    <input type="text" class="form-control" id="inputModalSearch" name="q" placeholder="Search ...">
+                    <button type="submit" class="input-group-text bg-success text-light">
+                        <i class="fa fa-fw fa-search text-white"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+
+    <!-- Start Contact -->
+<div class="container py-5">
+    <div class="row py-5">
+        {% for i in d %}
+        <form class="col-md-9 m-auto" method="post" role="form">
+            {% csrf_token %}
+            <div class="row">
+                <div class="form-group col-md-6 mb-3">
+                    <label for="inputname">Name</label>
+                    <input type="text" class="form-control mt-1" id="name" value="{{ i.username }}" name="name" placeholder="Name" readonly="True">
+                </div>
+                <div class="form-group col-md-6 mb-3">
+                    <label for="inputemail">Email</label>
+                    <input type="email" class="form-control mt-1" id="email" value="{{ i.email }}" name="email" placeholder="Email" readonly="True">
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="inputsubject">Subject</label>
+                <input type="text" class="form-control mt-1" id="subject" name="subject" placeholder="Subject">
+            </div>
+            <div class="mb-3">
+                <label for="inputmessage">Message</label>
+                <textarea class="form-control mt-1" id="message" name="message" placeholder="Message" rows="8"></textarea>
+            </div>
+            <div class="row">
+                <div class="col text-end mt-2">
+                    <button type="submit" class="btn btn-success btn-lg px-3">Raise Ticket</button>
+                </div>
+            </div>
+        </form>
+        {% endfor %}
+    </div>
+</div>
+<!-- End Contact -->
+
+<center>
+    <!-- Start Footer -->
+    <footer class="bg-dark" id="tempaltemo_footer">
+        <div class="w-100 bg-black py-3">
+            <div class="container">
+                <div class="row pt-2">
+                    <div class="col-12">
+                        <p class="text-left text-light">
+                            Copyright &copy; 2022 <a href="https://codebook.in/">CodeBook</a>
+                            | Designed by <a rel="sponsored" href="http://fzinfotech.com/" target="_blank">FZ!NFOTECH</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </footer>
+    <!-- End Footer -->
+</center>
+
+    <!-- Start Script -->
+    <script src="{% static 'js/jquery-1.11.0.min.js' %}"></script>
+    <script src="{% static 'js/jquery-migrate-1.2.1.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'js/templatemo.js' %}"></script>
+    <script src="{% static 'js/custom.js' %}"></script>
+    <script>
+		
+        {% for msg in messages %} 
+              
+          swal("Server Response", "{{msg}}");
+        {% endfor %}
+        
+      </script> 
+    <!-- End Script -->
+</body>
+
+</html>
